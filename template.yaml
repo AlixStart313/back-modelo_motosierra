@@ -131,3 +131,7 @@ Outputs:
   UpdateItemFunction:
     Description: "Update Item Lambda Function ARN"
     Value: !GetAtt UpdateMotosierraFunction.Arn
+
+
+# More information about the configuration file can be found here:
+# https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-config.html
