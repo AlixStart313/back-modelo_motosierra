@@ -1,0 +1,133 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  lambdas_items
+  Sample SAM Template for lambdas_motosierras
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 25
+    MemorySize: 128
+
+Resources:
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: LambdaBasicExecution
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: arn:aws:logs:*:*:*
+  ApiMotosierras:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      Name: ApiMotosierras
+
+  GetMotosierrasFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: get_items/
+      Handler: app.lambda_handler
+      Runtime: python3.12
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Architectures:
+        - x86_64
+      Events:
+        GetMotosierras:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiMotosierras
+            Path: /get_items
+            Method: get
+
+  DeleteMotosierrasFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: delete_item/
+      Handler: app.lambda_handler
+      Runtime: python3.12
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Architectures:
+        - x86_64
+      Events:
+        DeleteMotosierra:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiMotosierras
+            Path: /delete/{id}
+            Method: delete
+
+  SaveMotosierrasFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: save_item/
+      Handler: app.lambda_handler
+      Runtime: python3.12
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Architectures:
+        - x86_64
+      Events:
+        SaveMotosierra:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiMotosierras
+            Path: /save_item
+            Method: post
+
+  UpdateMotosierraFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: update_item/
+      Handler: app.lambda_handler
+      Runtime: python3.12
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Architectures:
+        - x86_64
+      Events:
+        UpdateMotosierra:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiMotosierras
+            Path: /update_item
+            Method: put
+
+Outputs:
+  DeleteItemApi:
+    Description: "API Gateway endpoint URL for Prod stage for Delete Item function"
+    Value: !Sub "https://${ApiItem}.execute-api.${AWS::Region}.amazonaws.com/Prod/delete/{id}"
+  DeleteItemFunction:
+    Description: "Delete item Lambda Function ARN"
+    Value: !GetAtt DeleteItemFunction.Arn
+  GetItemsApi:
+    Description: "API Gateway endpoint URL for Prod stage for Get Items function"
+    Value: !Sub "https://${ApiItem}.execute-api.${AWS::Region}.amazonaws.com/Prod/get_items"
+  GetItemsFunction:
+    Description: "Get items Lambda Function ARN"
+    Value: !GetAtt GetItemsFunction.Arn
+  SaveItemApi:
+    Description: "API Gateway endpoint URL for Prod stage for SaveItems function"
+    Value: !Sub "https://${ApiItem}.execute-api.${AWS::Region}.amazonaws.com/Prod/save_item"
+  SaveItemFunction:
+    Description: "Save Item Lambda Function ARN"
+    Value: !GetAtt SaveItemFunction.Arn
+  UpdateItemApi:
+    Description: "API Gateway endpoint URL for Prod stage for UpdateItem function"
+    Value: !Sub "https://${ApiItem}.execute-api.${AWS::Region}.amazonaws.com/Prod/update_item"
+  UpdateItemFunction:
+    Description: "Update Item Lambda Function ARN"
+    Value: !GetAtt UpdateItemFunction.Arn
