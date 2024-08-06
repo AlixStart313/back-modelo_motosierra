@@ -1,4 +1,4 @@
-name: Build, Test with Sonar and Deploy to AWS
+name: Build and Deploy to AWS
 on:
   push:
     branches:
