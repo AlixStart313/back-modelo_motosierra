@@ -92,7 +92,7 @@ Resources:
   UpdateMotosierraFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: update_item/
+      CodeUri: update_car/
       Handler: app.lambda_handler
       Runtime: python3.12
       Role: !GetAtt LambdaExecutionRole.Arn
