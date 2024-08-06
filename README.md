@@ -56,7 +56,7 @@ You can find your API Gateway Endpoint URL in the output values displayed after 
 Build your application with the `sam build --use-container` command.
 
 ```bash
-lambdas_carros$ sam build --use-container
+lambdas_motosierras$ sam build --use-container
 ```
 
 The SAM CLI installs dependencies defined in `hello_world/requirements.txt`, creates a deployment package, and saves it in the `.aws-sam/build` folder.
@@ -66,14 +66,14 @@ Test a single function by invoking it directly with a test event. An event is a 
 Run functions locally and invoke them with the `sam local invoke` command.
 
 ```bash
-lambdas_carros$ sam local invoke HelloWorldFunction --event events/event.json
+lambdas_motosierras$ sam local invoke HelloWorldFunction --event events/event.json
 ```
 
 The SAM CLI can also emulate your application's API. Use the `sam local start-api` to run the API locally on port 3000.
 
 ```bash
-lambdas_carros$ sam local start-api
-lambdas_carros$ curl http://localhost:3000/
+lambdas_motosierras$ sam local start-api
+lambdas_motosierras$ curl http://localhost:3000/
 ```
 
 The SAM CLI reads the application template to determine the API's routes and the functions that they invoke. The `Events` property on each function's definition includes the route and method for each path.
@@ -112,7 +112,7 @@ lambdas_carros$ pip install -r tests/requirements.txt --user
 lambdas_carros$ python -m pytest tests/unit -v
 # integration test, requiring deploying the stack first.
 # Create the env variable AWS_SAM_STACK_NAME with the name of the stack we are testing
-lambdas_carros$ AWS_SAM_STACK_NAME="lambdas_carros" python -m pytest tests/integration -v
+lambdas_motosierras$ AWS_SAM_STACK_NAME="lambdas_motosierras" python -m pytest tests/integration -v
 ```
 
 ## Cleanup
@@ -120,7 +120,7 @@ lambdas_carros$ AWS_SAM_STACK_NAME="lambdas_carros" python -m pytest tests/integ
 To delete the sample application that you created, use the AWS CLI. Assuming you used your project name for the stack name, you can run the following:
 
 ```bash
-sam delete --stack-name "lambdas_carros"
+sam delete --stack-name "lambdas_motosierras"
 ```
 
 ## Resources
