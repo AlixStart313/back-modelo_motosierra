@@ -80,7 +80,7 @@ def connect_to_database():
 def motosierra(brand, model, power, weigth):
     connection = connect_to_database()
     cursor = connection.cursor()
-    cursor.execute("select * from Motosierras where brand = %s and model = %s and power = %s and weigth = %s;", (brand, model, power, weigth))
+    cursor.execute("select * from Motosierras where brand = %s and model = %s and power = %s and weight = %s;", (brand, model, power, weigth))
     result = cursor.fetchall()
     return len(result) > 0
 
@@ -88,7 +88,7 @@ def save_motosierra(brand, model, power, weigth, headers):
     try:
         connection = connect_to_database()
         cursor = connection.cursor()
-        cursor.execute("INSERT INTO MotoSierras (brand, model, power, weigth) VALUES (%s, %s, %s, %s)", (brand, model, power, weigth))
+        cursor.execute("INSERT INTO MotoSierras (brand, model, power, weight) VALUES (%s, %s, %s, %s)", (brand, model, power, weigth))
         connection.commit()
 
         return {
