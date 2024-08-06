@@ -109,25 +109,25 @@ Resources:
 Outputs:
   DeleteItemApi:
     Description: "API Gateway endpoint URL for Prod stage for Delete Item function"
-    Value: !Sub "https://${ApiItem}.execute-api.${AWS::Region}.amazonaws.com/Prod/delete/{id}"
+    Value: !Sub "https://${ApiMotosierras}.execute-api.${AWS::Region}.amazonaws.com/Prod/delete/{id}"
   DeleteItemFunction:
     Description: "Delete item Lambda Function ARN"
-    Value: !GetAtt DeleteItemFunction.Arn
+    Value: !GetAtt DeleteMotosierrasFunction.Arn
   GetItemsApi:
     Description: "API Gateway endpoint URL for Prod stage for Get Items function"
-    Value: !Sub "https://${ApiItem}.execute-api.${AWS::Region}.amazonaws.com/Prod/get_items"
+    Value: !Sub "https://${ApiMotosierras}.execute-api.${AWS::Region}.amazonaws.com/Prod/get_items"
   GetItemsFunction:
     Description: "Get items Lambda Function ARN"
-    Value: !GetAtt GetItemsFunction.Arn
+    Value: !GetAtt GetMotosierrasFunction.Arn
   SaveItemApi:
     Description: "API Gateway endpoint URL for Prod stage for SaveItems function"
-    Value: !Sub "https://${ApiItem}.execute-api.${AWS::Region}.amazonaws.com/Prod/save_item"
+    Value: !Sub "https://${ApiMotosierras}.execute-api.${AWS::Region}.amazonaws.com/Prod/save_item"
   SaveItemFunction:
     Description: "Save Item Lambda Function ARN"
-    Value: !GetAtt SaveItemFunction.Arn
+    Value: !GetAtt SaveMotosierrasFunction.Arn
   UpdateItemApi:
     Description: "API Gateway endpoint URL for Prod stage for UpdateItem function"
-    Value: !Sub "https://${ApiItem}.execute-api.${AWS::Region}.amazonaws.com/Prod/update_item"
+    Value: !Sub "https://${ApiMotosierras}.execute-api.${AWS::Region}.amazonaws.com/Prod/update_item"
   UpdateItemFunction:
     Description: "Update Item Lambda Function ARN"
-    Value: !GetAtt UpdateItemFunction.Arn
+    Value: !GetAtt UpdateMotosierraFunction.Arn
