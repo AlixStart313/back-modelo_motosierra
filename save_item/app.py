@@ -88,7 +88,7 @@ def save_motosierra(brand, model, power, weigth, headers):
     try:
         connection = connect_to_database()
         cursor = connection.cursor()
-        cursor.execute("INSERT INTO 'Motosierras (brand, model, power, weight) VALUES (%s, %s, %s, %s)", (brand, model, power, weigth))
+        cursor.execute("INSERT INTO Motosierras (brand, model, power, weight) VALUES (%s, %s, %s, %s)", (brand, model, power, weigth))
         connection.commit()
 
         return {
